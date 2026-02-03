@@ -1,26 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff7f6;
+  --foreground: #2c1216;
+  --rose: #c42b4b;
+  --rose-dark: #8e1b31;
+  --blush: #fde7ea;
+  --gold: #c08b4a;
+  --cream: #fff1e8;
+  --ink: #2c1216;
+  --card: #ffffff;
+  --muted: #8a6b73;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-display);
 }
 
 body {
-  background: var(--background);
+  background: radial-gradient(circle at top, #fff4f2 0%, #ffe6eb 40%, #fff7f6 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+.valentine-grid {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(196, 43, 75, 0.08) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 20px 60px rgba(139, 39, 58, 0.15);
+  border: 1px solid rgba(196, 43, 75, 0.12);
+  backdrop-filter: blur(10px);
+}
+
+.rose-gradient {
+  background: linear-gradient(135deg, #d84a65 0%, #b02644 100%);
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #f6d3a0 0%, #c08b4a 100%);
 }

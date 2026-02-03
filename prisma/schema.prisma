@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum OrderStatus {
+  PLACED
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PAID
+  PENDING
+  FAILED
+}
+
+enum PackageType {
+  ROSE
+  ROSE_NOTE
+  ROSE_NOTE_CHOC
+}
+
+model Order {
+  id             String        @id @default(cuid())
+  orderNumber    String        @unique
+  trackingCode   String
+  packageType    PackageType
+  priceCents     Int
+  deliveryTime   String
+  dorm           String
+  room           String
+  otherLocation  String?
+  addresseeName  String
+  senderName     String?
+  isAnonymous    Boolean       @default(false)
+  note           String?
+  status         OrderStatus   @default(PLACED)
+  paymentStatus  PaymentStatus @default(PAID)
+  stripeSession  String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
