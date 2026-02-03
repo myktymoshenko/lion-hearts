@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 
-type Params = { params: { orderNumber: string } };
+type Params = { params: Promise<{ orderNumber: string }> };
 
 export async function GET(request: Request, { params }: Params) {
+  const { orderNumber } = await params;
   const { searchParams } = new URL(request.url);
   const code = searchParams.get("code");
 
@@ -12,7 +13,7 @@ export async function GET(request: Request, { params }: Params) {
   }
 
   const order = await prisma.order.findUnique({
-    where: { orderNumber: params.orderNumber },
+    where: { orderNumber },
   });
 
   if (!order || order.trackingCode !== code) {
