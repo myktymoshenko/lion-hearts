@@ -2,10 +2,9 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { isAdminRequest } from "@/lib/admin";
 
-type Params = { params: Promise<{ id: string }> };
+type Params = { params: { id: string } };
 
 export async function PATCH(request: Request, { params }: Params) {
-  const { id } = await params;
   if (!isAdminRequest(request)) {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
   }
@@ -13,7 +12,7 @@ export async function PATCH(request: Request, { params }: Params) {
   const payload = await request.json();
 
   const updated = await prisma.order.update({
-    where: { id },
+    where: { id: params.id },
     data: {
       status: payload.status,
       deliveryTime: payload.deliveryTime,
